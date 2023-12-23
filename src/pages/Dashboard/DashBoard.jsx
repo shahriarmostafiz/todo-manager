@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 const DashBoard = () => {
     return (
-        <div>
+        <div className='bg-slate-950 text-white'>
             <Outlet />
         </div>
     );

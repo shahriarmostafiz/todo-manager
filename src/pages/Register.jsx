@@ -61,6 +61,7 @@ const Register = () => {
                             .then()
                             .catch()
                         navigate('/login')
+                        toast.success("signed up, login to continue")
 
                     })
             })

@@ -25,13 +25,14 @@ const CreateTask = ({ tasks, setTasks }) => {
         const thisdeadline = data.deadline
         const thispriority = data.priority
         const user = auth.currentUser.email
-        setTask({ ...prev, name: thisname, detail: thisdetail, priority: thispriority, deadline: thisdeadline })
-        const taskData = { ...task, name: thisname, detail: thisdetail, priority: thispriority, deadline: thisdeadline, user: user }
-        myAxios.post("/addTodo", task)
-            .then(res => {
-                console.log(res.data)
+        setTask({ ...task, name: thisname, detail: thisdetail, priority: thispriority, deadline: thisdeadline })
+        const taskData = { ...task, name: thisname, details: thisdetail, priority: thispriority, deadline: thisdeadline, user: user }
+        console.log("to be sent to server", taskData);
+        // myAxios.post("/addTodo", taskData)
+        //     .then(res => {
+        //         console.log(res.data)
 
-            })
+        //     })
         // setTasks(prev => {
         //     const list = [...prev, task]
         //     return list
@@ -40,7 +41,7 @@ const CreateTask = ({ tasks, setTasks }) => {
     console.log(task);
     console.log(tasks);
     return (
-        <div className='w-full lg:w-1/3 lg:mx-auto'>
+        <div className='w-full lg:w-1/3 lg:mx-auto text-white'>
             <h1 className='text-3xl font-medium text-info py-6 text-center'>Create a Task</h1>
             <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -48,9 +49,9 @@ const CreateTask = ({ tasks, setTasks }) => {
                 {/* Name  */}
                 <div >
                     <label className="label">
-                        <span className="label-text">Task Name  </span>
+                        <span className="text-white label-text ">Task Name  </span>
                     </label>
-                    <input type="text" placeholder="Name" className="input  input-bordered input-info w-full "
+                    <input type="text" placeholder="Name" className="input  input-bordered bg-transparent input-info w-full "
                         {...register("name", {
                             required: true
                         })} />
@@ -59,9 +60,9 @@ const CreateTask = ({ tasks, setTasks }) => {
                 {/* details  */}
                 <div>
                     <label className="label">
-                        <span className="label-text">Details </span>
+                        <span className="text-white label-text">Details </span>
                     </label>
-                    <input type="text" placeholder="Detail" className="input  input-bordered input-info w-full "
+                    <input type="text" placeholder="Detail" className="input  input-bordered bg-transparent input-info w-full "
                         {...register("detail", {
                             required: true
                         })} />
@@ -71,30 +72,30 @@ const CreateTask = ({ tasks, setTasks }) => {
                 <div className='flex justify-between gap-4 '>
                     <div className="flex flex-col w-full">
                         <label className="label">
-                            <span className="label-text">Deadline </span>
+                            <span className="text-white label-text">Deadline </span>
                         </label>
-                        <input type="date" placeholder="Deadline" className="input  input-bordered input-info w-full "
+                        <input type="date" placeholder="Deadline" className="input  input-bordered bg-transparent input-info w-full "
                             {...register("deadline", {
                                 required: true
                             })} />
                         {errors.deadline?.type === "required" && <span className="py-2 pl-4 text-red-500">Deadline is required</span>}
                     </div>
 
-                    <div className='flex flex-col w-full'>
+                    <div className='flex flex-col w-full bg-tr'>
                         <label className="label">
-                            <span className="label-text">Priority</span>
+                            <span className="text-white label-text">Priority</span>
                         </label>
                         <select
                             defaultValue={"low"}
-                            className="select select-bordered w-full max-w-xs"
+                            className="select select-bordered w-full max-w-xs bg-transparent text-white"
                             {...register("priority", {
                                 required: true
                             })}
                         >
-                            <option value={"low"}>Low </option>
+                            <option value={"low"} className='bg-transparent text-black'>Low </option>
                             {/* <option value={"user"}>User</option> */}
-                            <option value={"moderate"}>Moderate</option>
-                            <option value={"high"}>High </option>
+                            <option value={"moderate"} className='bg-transparent text-black'>Moderate</option>
+                            <option value={"high"} className='bg-transparent text-black '>High </option>
                         </select>
                     </div>
 
