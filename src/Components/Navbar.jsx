@@ -9,7 +9,9 @@ const Navbar = () => {
 
     const links = <>
         <li><NavLink to={"/"}>Home </NavLink></li>
-        <li><NavLink to={"/dashboard"}>DashBoard </NavLink></li>
+        <li><NavLink to={"/dashboard/user"}>DashBoard </NavLink></li>
+        <li><NavLink to={"/dashboard/allTasks"}> Add Task   </NavLink></li>
+
 
     </>
     const signOut = () => {
@@ -31,7 +33,7 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">Taskify </a>
+                    <Link to={"/"} className="btn btn-ghost text-xl">Taskify </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

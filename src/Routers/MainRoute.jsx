@@ -1,4 +1,3 @@
-import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
 import Home from '../pages/Home/Home';
@@ -7,6 +6,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import TaskApp from '../pages/Dashboard/TaskApp';
 import PriveRoute from './PrivateRoute';
+import UserProfile from '../pages/Dashboard/UserProfile';
 
 const MainRoute = createBrowserRouter([{
     path: "/",
@@ -29,6 +29,10 @@ const MainRoute = createBrowserRouter([{
         {
             path: "allTasks",
             element: <TaskApp />
+        },
+        {
+            path: "user",
+            element: <UserProfile></UserProfile>
         }
     ]
 }])

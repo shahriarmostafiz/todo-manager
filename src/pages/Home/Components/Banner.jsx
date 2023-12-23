@@ -7,7 +7,7 @@ const Banner = () => {
             <div className='bg-black opacity-20 bg-blend-overlay'>
                 <img src={cover} className='w-full overflow-y-hidden' alt="" />
             </div>
-            <Link to={"/dashboard"} className="absolute top-1/2 bottom-1/2 btn left-1/2 right-1/2 min-w-40 btn-success  text-white">Add a Task</Link>
+            <Link to={"/dashboard/allTasks"} className="absolute top-1/2 bottom-1/2 btn left-1/2 right-1/2 min-w-40 btn-success  text-white">Add a Task</Link>
         </div>
     );
 };
