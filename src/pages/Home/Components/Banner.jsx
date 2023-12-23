@@ -1,5 +1,5 @@
 import React from 'react';
-import cover from "../../../assets/cover.jpg"
+// import cover from "../../../assets/cover.jpg"
 import { Link } from 'react-router-dom';
 const Banner = () => {
     return (
@@ -15,7 +15,7 @@ const Banner = () => {
                 <div className="max-w-md">
                     <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
                     <p className="mb-5">Are Your Struggling with managing your task .</p>
-                    <Link to={"/dashboard/allTasks"} className="btn btn-info btn-outline">Get Started </Link>
+                    <Link to={"/dashboard/allTasks"} className="btn btn-info text-white">Get Started </Link>
                 </div>
             </div>
         </div>

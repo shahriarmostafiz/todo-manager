@@ -6,20 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc'
 import { AuthContext } from "../AuthProvider/AuthContext";
 import toast from "react-hot-toast";
+import { AiFillGithub } from "react-icons/ai";
 const Register = () => {
-    const { logout, googleLogin, register, updateData } = useContext(AuthContext)
+    const { logout, googleLogin, register, updateData, gitLogin } = useContext(AuthContext)
     const [error, setError] = useState('')
     const navigate = useNavigate()
-    // const   = {
-    //     position: "top-center",
-    //     autoClose: 5000,
-    //     hideProgressBar: true,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "light",
-    // }
+
 
     const handdleSignUp = e => {
         e.preventDefault()
@@ -86,6 +78,18 @@ const Register = () => {
             })
 
     }
+    const handleGitLogin = () => {
+        gitLogin()
+            .then(() => {
+                toast.success('logged in ')
+                navigate(location?.state ? location.state : '/')
+            })
+            .catch(err => {
+                console.log(err)
+                return toast.error(err.message)
+            })
+
+    }
     return (
         <div className="p-4 ">
             <h1 className="text-4xl text-center font-semibold mt-7 mb-2">Sign Up today</h1>
@@ -127,6 +131,7 @@ const Register = () => {
                     <div className="border bg-slate-500 h-0.5 w-32"></div> <p>OR</p> <div className="border h-0.5 w-32 bg-slate-500"></div>
                 </div>
                 <button className="btn rounded-full btn-outline btn-error btn-wide " onClick={loginWithGoogle}> <FcGoogle />Sign up with Google </button>
+                <button className="btn rounded-full btn-outline btn-error btn-wide " onClick={handleGitLogin}> <AiFillGithub />Sign up with Github</button>
             </div>
 
 

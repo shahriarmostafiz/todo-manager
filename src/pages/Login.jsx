@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AiOutlineEye } from 'react-icons/ai';
+import { AiFillGithub, AiOutlineEye } from 'react-icons/ai';
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc'
 import { AuthContext } from "../AuthProvider/AuthContext";
@@ -13,20 +13,10 @@ const Login = () => {
     const location = useLocation()
 
     console.log(location.state);
-    const { login, googleLogin } = useContext(AuthContext)
+    const { login, googleLogin, gitLogin } = useContext(AuthContext)
     // const { login, googleLogin } = useContext(AuthContext)
     const [showpass, setShowPass] = useState(false)
     const navigate = useNavigate()
-    // const toastInfo = {
-    //     position: "top-center",
-    //     autoClose: 5000,
-    //     hideProgressBar: true,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "light",
-    // }
 
     const handleLogin = e => {
         e.preventDefault()
@@ -57,13 +47,25 @@ const Login = () => {
             })
 
     }
+    const handleGitLogin = () => {
+        gitLogin()
+            .then(() => {
+                toast.success('logged in ')
+                navigate(location?.state ? location.state : '/')
+            })
+            .catch(err => {
+                console.log(err)
+                return toast.error(err.message)
+            })
+
+    }
     return (
         <div>
             <div className="flex w-full flex-col justify-center min-h-[600px] items-center ">
                 <div className="border w-4/5 lg:w-1/3 py-8 lg:py-16 rounded ">
                     <h1 className="text-3xl font-semibold px-8 text-red-900">Login to Continue</h1>
-                    <form onSubmit={handleLogin}>
-                        <div className="p-8 space-y-8 w-full">
+                    <form onSubmit={handleLogin} >
+                        <div className="p-8 space-y-8 w-full text-black">
 
                             <div className="border-b-2 border-gray-700">
                                 <input className=" rounded  w-full border-none outline-none py-2 px-4" placeholder="Email" type="email" name="email" id="email" />
@@ -84,7 +86,8 @@ const Login = () => {
                     <div className="flex items-center gap-1">
                         <div className="border bg-slate-500 h-0.5 w-32"></div> <p>OR</p> <div className="border h-0.5 w-32 bg-slate-500"></div>
                     </div>
-                    <button className="btn btn-wide rounded-full btn-outline btn-accent " onClick={handleGoogleLogin}> <FcGoogle />Login  </button>
+                    <button className="btn btn-wide rounded-full btn-outline btn-accent font-medium text-lg" onClick={handleGoogleLogin}> <FcGoogle size={20} />Login  </button>
+                    <button className="btn btn-wide rounded-full btn-outline btn-accent font-medium text-lg " onClick={handleGitLogin}> <AiFillGithub size={20} />Login  </button>
                 </div>
             </div>
 
