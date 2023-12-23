@@ -9,7 +9,7 @@ const User = () => {
     return (
         <>
             <h1 className='text-3xl md:text-4xl text-center py-6  md:py-10 font-bold text-info'>Our Users </h1>
-            <div className='flex flex-col justify-center md:flex-row gap-4 '>
+            <div className='flex flex-col justify-center items-center lg:flex-row gap-4 '>
                 <UserCard text={"Students"} img={student}></UserCard>
                 <UserCard text={"Bankers"} img={banker}></UserCard>
                 <UserCard text={"Creators"} img={CC}></UserCard>
