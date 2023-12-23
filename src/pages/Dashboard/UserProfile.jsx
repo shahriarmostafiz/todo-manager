@@ -6,6 +6,7 @@ import auth from '../../Firebase/firebase';
 import { FiEdit } from 'react-icons/fi';
 import { useForm } from 'react-hook-form';
 import useAxios from '../../hooks/useAxios';
+import toast from 'react-hot-toast';
 
 const UserProfile = () => {
     const { user, loading } = useContext(AuthContext)
@@ -27,14 +28,15 @@ const UserProfile = () => {
     }
     const handleSubmit = (e, id) => {
         // console.log(data); data
+        e.preventDefault()
         const data = e.target
         const name = data.name.value
-        const detail = data.detail.value
+        const details = data.details.value
         const deadline = data.deadline.value
         const priority = data.priority.value
         const editData = {
             name,
-            detail,
+            details,
             deadline,
             priority
         }
@@ -45,10 +47,17 @@ const UserProfile = () => {
         // setTask({ ...task, name: thisname, detail: thisdetail, priority: thispriority, deadline: thisdeadline })
 
         console.log("to be sent to server", editData);
-        // myAxios.put(`/todo/edit/${id}`, editData)
-        //     .then(res => {
-        //         console.log(res.data);
-        //     })
+        myAxios.put(`/todo/edit/${id}`, editData)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount) {
+                    refetch()
+                    toast.success("Updated task Successfully ")
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
         // myAxios.post("/addTodo", taskData)
         //     .then(res => {
         //         console.log(res.data)
@@ -77,23 +86,27 @@ const UserProfile = () => {
                 </div>
             </div>
             <div>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto text-white">
                     <table className="table">
                         {/* head */}
                         <thead>
-                            <tr>
+                            <tr className='text-white'>
                                 <th>#</th>
                                 <th>Task</th>
+                                <th>Priority </th>
                                 <th>Deadline</th>
+
                                 <th>Actions </th>
                             </tr>
                         </thead>
                         <tbody>
                             {/* row 1 */}
                             {
-                                data?.map((task, idx) => <tr key={task._id}>
+                                data?.map((task, idx) => <tr className='hover:text-blue-300' key={task._id}>
                                     <th>{idx + 1}</th>
                                     <td>{task?.name}</td>
+                                    <td>{task?.priority}</td>
+
                                     <td>{task.deadline}</td>
                                     <td>
                                         <button
@@ -110,7 +123,7 @@ const UserProfile = () => {
 
                                                     <div className='w-full' >
                                                         <label className="label">
-                                                            <span className="text-white label-text ">Task Name  </span>
+                                                            <span className="text-black label-text ">Task Name  </span>
                                                         </label>
                                                         <input type="text" placeholder="Name" className="input  input-bordered bg-transparent input-info w-full "
                                                             name='name'
@@ -122,7 +135,7 @@ const UserProfile = () => {
                                                         {/* deadline */}
                                                         <div className="flex flex-col w-full">
                                                             <label className="label">
-                                                                <span className="text-white label-text">Deadline </span>
+                                                                <span className="text-black label-text">Deadline </span>
                                                             </label>
                                                             <input type="date" placeholder="Deadline" className="input  input-bordered bg-transparent input-info w-full "
                                                                 name="deadline"
@@ -132,11 +145,11 @@ const UserProfile = () => {
                                                         {/* priority */}
                                                         <div className='flex flex-col w-full bg-tr'>
                                                             <label className="label">
-                                                                <span className="text-white label-text">Priority</span>
+                                                                <span className="text-black label-text">Priority</span>
                                                             </label>
                                                             <select
                                                                 defaultValue={task.priority}
-                                                                className="select select-bordered border-info w-full max-w-xs bg-transparent text-white"
+                                                                className="select select-bordered border-info w-full max-w-xs bg-transparent text-black"
                                                                 name='priority'
                                                             >
                                                                 <option value={"low"} className='bg-transparent text-black'>Low </option>
