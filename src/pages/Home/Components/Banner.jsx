@@ -9,7 +9,7 @@ const Banner = () => {
         //     </div>
         //     <Link to={"/dashboard/allTasks"} className="absolute top-1/2 bottom-1/2 btn left-1/2 right-1/2 min-w-40 btn-success  text-white">Add a Task</Link>
         // </div>
-        <div className="hero min-h-screen bg-cover " style={{ backgroundImage: 'url("/src/assets/cover.jpg")' }}>
+        <div className="hero min-h-screen bg-cover " style={{ backgroundImage: 'url("https://i.ibb.co/DkPzJCW/cover.jpg")' }}>
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-center text-neutral-content">
                 <div className="max-w-md">
